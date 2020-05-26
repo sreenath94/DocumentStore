@@ -14,7 +14,12 @@ import simpledocumentstore.constants.Constants;
 import simpledocumentstore.exception.DocumentStoreException;
 import simpledocumentstore.models.DocumentModel;
 import simpledocumentstore.utils.PropertyUtils;
-
+/**
+ * This class have implementation for storing the file locally
+ * 
+ * @author Sreenath S
+ *
+ */
 public class LocalStore implements Store {
 	
 	private final String EXP_NOT_AVL = " Not available in application.properties";

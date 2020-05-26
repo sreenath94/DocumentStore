@@ -24,6 +24,12 @@ import simpledocumentstore.exception.DocumentStoreException;
 import simpledocumentstore.models.DocumentModel;
 import simpledocumentstore.utils.PropertyUtils;
 
+/**
+ * This class have implementation for storing the file to a mongodb server
+ * 
+ * @author Sreenath S
+ *
+ */
 public class MongoDbStore implements Store {
 
 	private Properties properties;
