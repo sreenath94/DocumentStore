@@ -1,9 +1,8 @@
 # Document Store
-Document Store is a java library used to store documents in different storage options based on configuration
-
+Document Store is a java library used to store documents in different storage options (localstorage, MongoDB etc) based on configuration
 ## Installation
-* This library can be installed by adding jar file to the class path of the project
-* Add the below dependecy to pom.xml
+* Add build jar file to the class path of the project
+* Add the below dependency to pom.xml
 ```bash
 <dependency>
 <groupId>commons-io</groupId>
@@ -70,23 +69,13 @@ public class TestClass {
 ```
 
 ## Adding new store to the library
-The following changes need to be done to add new library
-* Create new documentStore.type for the new library add the same to simpledocumentstore.constants.Constants.java
+The following changes need to be done to add a new store to the library
+* Create a new documentStore.type for the new library and add the same to simpledocumentstore.constants.Constants.java
 	```java
 	package simpledocumentstore.constants;
 	public class Constants {
 	public static String NEWSTORAGE = "NEWSTORAGETYPE";
 	}
-	```
-* Create new Store.java implementation class for the library and update all Store methods with the functionality
-	```java
-	public class NewStore implements Store {
-	public void uploadDocument(File f) throws DocumentStoreException {
-	}
-	public DocumentModel downloadDocument(String documentName) throws DocumentStoreException {
-	}
-	}
-
 	```
 * Create new Store.java implementation class for the library and update all Store methods with the functionality
 	```java
