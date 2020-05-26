@@ -18,7 +18,7 @@ documentStore.type = LOCALSTORAGE
 documentStore.file.uploadDestination = test/
 documentStore.downloadDestination = download/
 ```
-* For using MONGODB storage the following propeties should be added to resource/application.properties file 
+* For using MONGODB storage the following steps needs to be done 
   * Add the following properties to resource/application.properties file 
       ```bash
       documentStore.type = MONGODB
@@ -40,7 +40,7 @@ documentStore.downloadDestination = download/
 
 
 ## Usage
-
+* Upload file
 ```java
 import java.io.File;
 
@@ -51,6 +51,20 @@ public class TestClass {
 
 	public static void main(String args[]) throws DocumentStoreException {
 		DocumentStore.uploadDocument(new File("target/test.pdf"));
+	}
+}
+```
+* Download file
+```java
+import java.io.File;
+import simpledocumentstore.models.DocumentModel;
+import simpledocumentstore.DocumentStore;
+import simpledocumentstore.exception.DocumentStoreException;
+
+public class TestClass {
+
+	public static void main(String args[]) throws DocumentStoreException {
+		DocumentModel documentModel =  DocumentStore.downloadDocument("test.pdf"); 
 	}
 }
 ```
