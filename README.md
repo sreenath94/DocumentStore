@@ -68,3 +68,40 @@ public class TestClass {
 	}
 }
 ```
+
+## Adding new store to the library
+The following changes need to be done to add new library
+* Create new documentStore.type for the new library add the same to simpledocumentstore.constants.Constants.java
+	```java
+	package simpledocumentstore.constants;
+	public class Constants {
+	public static String NEWSTORAGE = "NEWSTORAGETYPE";
+	}
+	```
+* Create new Store.java implementation class for the library and update all Store methods with the functionality
+	```java
+	public class NewStore implements Store {
+	public void uploadDocument(File f) throws DocumentStoreException {
+	}
+	public DocumentModel downloadDocument(String documentName) throws DocumentStoreException {
+	}
+	}
+
+	```
+* Create new Store.java implementation class for the library and update all Store methods with the functionality
+	```java
+	public class NewStore implements Store {
+	public void uploadDocument(File f) throws DocumentStoreException {
+	}
+	public DocumentModel downloadDocument(String documentName) throws DocumentStoreException {
+	}
+	}
+
+	```
+* Update StoreFactory.java with the new implimentation class for the documentStore.type
+	```java
+	else if (Constants.NEWSTORAGE.equals(storeType)) {
+	return new NewStore();
+	} 
+	```
+* Document the property values needed for the user to use the new Store implementation
