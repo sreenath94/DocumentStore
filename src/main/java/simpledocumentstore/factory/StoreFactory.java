@@ -10,6 +10,8 @@ import simpledocumentstore.impl.MongoDbStore;
 import simpledocumentstore.utils.PropertyUtils;
 
 public class StoreFactory {
+	
+	private static String INVALID_STORAGE_TYPE = "Invalid Store type";
 	/**
 	 * Method will return Store depending upon the type of storage 
 	 * added by user in application.properties file
@@ -18,7 +20,7 @@ public class StoreFactory {
 	 * @throws DocumentStoreException
 	 */
 	public static Store getStore() throws DocumentStoreException {
-		String storeType = PropertyUtils.getProperties().getProperty("type");
+		String storeType = PropertyUtils.getProperties().getProperty(Constants.TYPE);
 		if (Objects.isNull(storeType)) {
 			throw new DocumentStoreException("type" + " missing in properties file");
 		}
@@ -27,7 +29,7 @@ public class StoreFactory {
 		} else if (Constants.MONGODB.equals(storeType)) {
 			return new MongoDbStore();
 		} else {
-			throw new DocumentStoreException("Invalid Store type");
+			throw new DocumentStoreException(INVALID_STORAGE_TYPE);
 		}
 
 	}

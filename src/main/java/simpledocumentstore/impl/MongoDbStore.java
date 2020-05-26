@@ -19,6 +19,7 @@ import com.mongodb.client.gridfs.GridFSBuckets;
 import com.mongodb.client.gridfs.model.GridFSUploadOptions;
 
 import simpledocumentstore.Store;
+import simpledocumentstore.constants.Constants;
 import simpledocumentstore.exception.DocumentStoreException;
 import simpledocumentstore.models.DocumentModel;
 import simpledocumentstore.utils.PropertyUtils;
@@ -26,13 +27,19 @@ import simpledocumentstore.utils.PropertyUtils;
 public class MongoDbStore implements Store {
 
 	private Properties properties;
+	
+	private String TYPE = "type";
+	
+	private String PRESENTATION = "presentation";
+	
+	private String FILE_NOT_EXIST = "File Does Not Exist";
 
 	public void uploadDocument(File file) throws DocumentStoreException {
 		validateInputFile(file);
 		properties = PropertyUtils.getProperties();
 		GridFSBucket gridFSFilesBucket = getGridFSBucket();
 		GridFSUploadOptions options = new GridFSUploadOptions().chunkSizeBytes(358400)
-				.metadata(new Document("type", "presentation"));
+				.metadata(new Document(TYPE, PRESENTATION));
 		InputStream streamToUploadFrom = null;
 		try {
 			streamToUploadFrom = new FileInputStream(file);
@@ -46,9 +53,9 @@ public class MongoDbStore implements Store {
 
 	public DocumentModel downloadDocument(String documentName) throws DocumentStoreException {
 		properties = PropertyUtils.getProperties();
-		String downloadLocation = properties.getProperty("file.download.destination");
+		String downloadLocation = properties.getProperty(Constants.FILE_DOWNLOAD_DESTINATION);
 		if (Objects.isNull(downloadLocation)) {
-			throw new DocumentStoreException("file.download.destination" + "Not available in application.properties");
+			throw new DocumentStoreException(Constants.FILE_DOWNLOAD_DESTINATION + "Not available in application.properties");
 		}
 		GridFSBucket gridFSFilesBucket = getGridFSBucket();
 		FileOutputStream fileOutputStream = null;
@@ -60,7 +67,7 @@ public class MongoDbStore implements Store {
 		try {
 			gridFSFilesBucket.downloadToStream(documentName, fileOutputStream);
 		} catch (Exception e) {
-			throw new DocumentStoreException("File Does Not Exist");
+			throw new DocumentStoreException(FILE_NOT_EXIST);
 		}
 		DocumentModel documentModel = null;
 		try {
@@ -76,9 +83,9 @@ public class MongoDbStore implements Store {
 
 
 	private GridFSBucket getGridFSBucket() {
-		MongoClient mongo = new MongoClient(properties.getProperty("host"),
-				Integer.parseInt(properties.getProperty("port")));
-		MongoDatabase db = mongo.getDatabase(properties.getProperty("db"));
+		MongoClient mongo = new MongoClient(properties.getProperty(Constants.HOST),
+				Integer.parseInt(properties.getProperty(Constants.PORT)));
+		MongoDatabase db = mongo.getDatabase(properties.getProperty(Constants.DB));
 		GridFSBucket gridFSFilesBucket = GridFSBuckets.create(db, "files");
 		return gridFSFilesBucket;
 	}

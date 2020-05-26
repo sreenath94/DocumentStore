@@ -10,18 +10,21 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import simpledocumentstore.Store;
+import simpledocumentstore.constants.Constants;
 import simpledocumentstore.exception.DocumentStoreException;
 import simpledocumentstore.models.DocumentModel;
 import simpledocumentstore.utils.PropertyUtils;
 
 public class LocalStore implements Store {
+	
+	private String EXP_NOT_AVL = " Not available in application.properties";
 
 	public void uploadDocument(File f) throws DocumentStoreException {
 		validateInputFile(f);
 		Properties p = PropertyUtils.getProperties();
-		String destinationDirectory = p.getProperty("file.destination");
+		String destinationDirectory = p.getProperty(Constants.FILE_UPLOAD_DESTINATION);
 		if (Objects.isNull(destinationDirectory)) {
-			throw new DocumentStoreException("file.destination" + "Not available in application.properties");
+			throw new DocumentStoreException(Constants.FILE_UPLOAD_DESTINATION + EXP_NOT_AVL);
 		}
 
 		String destination = destinationDirectory + f.getName();
@@ -35,12 +38,12 @@ public class LocalStore implements Store {
 
 	public DocumentModel downloadDocument(String documentName) throws DocumentStoreException {
 		Properties p = PropertyUtils.getProperties();
-		String uploadLocation = p.getProperty("file.destination");
-		String destinationFile = p.getProperty("file.download.destination");
+		String uploadLocation = p.getProperty(Constants.FILE_UPLOAD_DESTINATION);
+		String destinationFile = p.getProperty(Constants.FILE_DOWNLOAD_DESTINATION);
 		if (Objects.isNull(uploadLocation)) {
-			throw new DocumentStoreException("file.destination" + "Not available in application.properties");
+			throw new DocumentStoreException(Constants.FILE_UPLOAD_DESTINATION +EXP_NOT_AVL);
 		} else if (Objects.isNull(destinationFile)) {
-			throw new DocumentStoreException("file.download.destination" + "Not available in application.properties");
+			throw new DocumentStoreException(Constants.FILE_DOWNLOAD_DESTINATION + EXP_NOT_AVL);
 		}
 		File initialFile = new File(uploadLocation + documentName);
 
