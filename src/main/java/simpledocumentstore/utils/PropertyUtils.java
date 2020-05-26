@@ -18,7 +18,7 @@ public class PropertyUtils {
 	
 	private static Properties properties=null;
 	
-	private static String EXCEPTION_MSG = "application.properties File Not Available";
+	private static final String EXCEPTION_MSG = "application.properties File Not Available";
 	
 	private PropertyUtils() {
 	}

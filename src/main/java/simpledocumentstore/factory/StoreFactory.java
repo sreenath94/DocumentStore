@@ -11,7 +11,7 @@ import simpledocumentstore.utils.PropertyUtils;
 
 public class StoreFactory {
 	
-	private static String INVALID_STORAGE_TYPE = "Invalid Store type";
+	private static final String INVALID_STORAGE_TYPE = "Invalid Store type";
 	/**
 	 * Method will return Store depending upon the type of storage 
 	 * added by user in application.properties file

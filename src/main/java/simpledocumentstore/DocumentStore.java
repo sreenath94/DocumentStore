@@ -8,11 +8,6 @@ import simpledocumentstore.models.DocumentModel;
 
 public class DocumentStore {
 
-//	public static void main(String args[]) throws DocumentStoreException {
-//		DocumentStore.uploadDocument(new File("target/sampledocument.pdf"));
-//		System.out.println(DocumentStore.downloadDocument("sampledocument.pdf").getDocument());
-//	}
-
 	/**
 	 * Method used to upload file to the configured Store in application.properties
 	 * file

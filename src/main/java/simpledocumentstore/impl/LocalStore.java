@@ -17,7 +17,7 @@ import simpledocumentstore.utils.PropertyUtils;
 
 public class LocalStore implements Store {
 	
-	private String EXP_NOT_AVL = " Not available in application.properties";
+	private final String EXP_NOT_AVL = " Not available in application.properties";
 
 	public void uploadDocument(File f) throws DocumentStoreException {
 		validateInputFile(f);

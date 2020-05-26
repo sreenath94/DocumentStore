@@ -28,11 +28,11 @@ public class MongoDbStore implements Store {
 
 	private Properties properties;
 	
-	private String TYPE = "type";
+	private final String TYPE = "type";
 	
-	private String PRESENTATION = "presentation";
+	private final String PRESENTATION = "presentation";
 	
-	private String FILE_NOT_EXIST = "File Does Not Exist";
+	private final String FILE_NOT_EXIST = "File Does Not Exist";
 
 	public void uploadDocument(File file) throws DocumentStoreException {
 		validateInputFile(file);
