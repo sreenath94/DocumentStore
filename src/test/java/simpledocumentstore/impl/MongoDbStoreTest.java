@@ -39,7 +39,7 @@ public class MongoDbStoreTest {
 	
 	@Test(expected = DocumentStoreException.class)
 	public void whenInputFileIsNotAvailable_shouldThrowDocumentStoreException() throws DocumentStoreException {
-		mongoDbStore.downloadDocument("test.pdf");
+		mongoDbStore.downloadDocument("xyz.pdf");
 	}
 	
 	
